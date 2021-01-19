@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std; 
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+struct yg{
+	int bh;
+	char name[20];
+	int piao;
+};
+yg rs[3]={{1,"李雷",0},
+          {2,"韩梅梅",0},
+		  {3,"张三",0}}; 
+int main(int argc, char** argv) {	 
+	int a[5];
+	
+	for(int i=0;i<5;i++)
+	{   cout<<"输入员工号进行投票（1--李雷，2--韩梅梅，3--张三）\n";
+		cin>>a[i];
+		if(a[i]==1)
+		rs[0].piao++;
+		else if(a[i]==2)
+		rs[1].piao++;
+		else if(a[i]==3)
+		rs[2].piao++;
+		else if(a[i]>3)
+		cout<<"投票无效"<<endl;
+	}
+	int max=rs[0].piao,n;
+    for(int i=1;i<3;i++){
+    	if(max<rs[i].piao){
+    	max=rs[i].piao;
+    	n=i;}
+	}
+    cout<<"投票结果："<<rs[n].name<<" "<<max<<endl;
+    
+	return 0;
+}   

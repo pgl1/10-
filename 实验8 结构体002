@@ -1,0 +1,79 @@
+#include<iostream>
+using namespace std;
+
+struct student
+{
+	int id;
+	char name[20];
+	char sex;
+	float score;
+
+};
+struct student stu[5] = {
+	{1,"李雷", 'm',87.5f},
+	{2,"韩梅梅",'f',90.0f},
+	{3,"张小明",'m',75.0f},
+	{4,"李小红",'f',63.5f},
+	{5,"张平",'f',54.0f}
+};
+
+int N = sizeof(stu)/sizeof(struct student);//计算出结构体数组的元素个数
+
+long int xin(int i);
+float a();
+int max();
+int main(){
+   int n;//n中存放选择的功能序号
+
+   while(1)
+   {
+  cout<<endl<<"请选择管理功能："<<endl;
+  cout<<"-----------------------"<<endl;
+  cout<<"-  1--查询学生信息    - "<<endl;
+  cout<<"-  2--统计平均分      - "<<endl;
+  cout<<"-  3--查看最高分      - "<<endl;
+  cout<<"------------------------"<<endl;
+
+  cin>>n;
+
+  switch(n)
+  {
+  case 1: cout<<"输入学生学号：";int i;cin>>i;xin(i);break;//输入学号，调用函数，根据学号查询学生信息
+  case 2: cout<<"平均分： "<<a();break;//调用求平均分的函数
+  case 3: cout<<max();break;//调用求最高分的函数
+  default: cout<<"没有此项功能，请重新选择。"<<endl;
+  }
+
+   }
+}
+
+//此处编写根据学号查询学生信息的函数
+long int xin(int i){
+	cout<<stu[i-1].id<<" "
+	    <<stu[i-1].name<<" "
+	    <<stu[i-1].score<<" "
+	    <<stu[i-1].sex<<" "; 
+
+} ;  
+
+//此处编写求平均分的函数
+float a(){
+	float pj;
+	for(int i=0;i<5;i++)
+		pj+=stu[i].score;
+		pj=pj/5;
+	return pj;
+}
+//此处编写求最高分的函数
+int max(){
+	int max,b;
+	
+	for(int i=0;i<5;i++){
+		if(max<stu[i].score){
+		max=stu[i].score;
+		b=i;
+		}
+	} 
+	cout<<"最高分："<<stu[b].name<<" ";
+	return max;
+} 

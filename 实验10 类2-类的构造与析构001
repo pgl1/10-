@@ -1,0 +1,78 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+class Vector{
+	private:
+	double *vector;int N;
+	public:
+	Vector();		//无参构造函数
+    Vector(double *v,int n); //构造函数，初始化vector数组
+    ~Vector();		//析构函数，释放申请的空间
+    void Print();    //依次输出向量中的元素
+    void Sort();  //对向量里的元素进行从小到大的排序  
+    double  DotProduct(Vector *p);//向量的点乘
+    double  Mod();//向量的模
+    void Normalize();//向量的单位化
+}; 
+Vector::Vector(){
+    vector=new double[3];
+    for(int i=0;i<3;i++)
+    vector[i]=0;  
+    N=3;
+}
+Vector::Vector(double *v,int n){
+	vector = new double[n];
+	N=n;
+    for(int i=0;i<N;i++)
+    vector[i]=v[i];
+}
+Vector::~Vector(){
+	delete vector;
+}
+void Vector::Print(){
+	for(int i=0;i<N;i++)
+		cout<<vector[i]<<" ";
+	 
+}
+void Vector::Sort(){
+	for(int pass=1;pass<N;pass++){
+		for(int i=0;i<N-pass;i++)
+		if(vector[i]>vector[i+1]){
+			int temp=vector[i];
+			vector[i]=vector[i+1];
+			vector[i+1]=temp;
+		}
+		for(int i=0;i<N;i++)
+		cout<<vector[i]<<",";
+		cout<<endl;
+	}
+}
+double Vector::DotProduct(Vector *p){
+	double dot=0;
+	for(int i=0;i<N;i++)
+	dot+=vector[i]*p->vector[i];
+	return dot;
+}   
+double Vector::Mod(){
+	double pfg=0;
+	for(int i=0;i<N;i++)
+		pfg+=vector[i]*vector[i];
+		pfg=sqrt(pfg);
+	return pfg;
+}
+void Vector::Normalize(){
+	for(int i=0;i<N;i++)
+	vector[i]=(1/Mod())*vector[i];
+}
+int main(int argc, char** argv) {
+	double a[]={5,2,3};
+	double b[]={2,3,4}; 
+	Vector v1(a,3),v2(b,3);
+	Vector*p=&v2;
+	v1.Print();
+	v2.Print(); 
+	cout<<"\n"<<v1.DotProduct(p);
+	cout<<"\n"<<v1.Mod();
+	return 0;  
+}          
